@@ -28,7 +28,7 @@
             </div>
         </div>
     </section>
-    {{-- <div class="container py-5">
+    <div class="container py-5">
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="card shadow-sm">
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
 @section('styles')

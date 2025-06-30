@@ -195,7 +195,7 @@
                             </div>
                             <div class="card-body p-4">
                                 <small class="text-muted d-block mb-2">{{ $enseignement->created_at->format('d/m/Y') }} - {{ $enseignement->created_at->locale('fr')->diffForHumans() }} </small>
-                                <h3 class="card-title h5"></h3>
+                                <h3 class="card-title h5"> {{$enseignement->titre}} </h3>
                                 <p class="bible-verse mb-3">"Ma grâce te suffit, car ma puissance s'accomplit dans la
                                     faiblesse." (2 Corinthiens 12:9)</p>
                                 <p class="card-text">Découvrez comment la grâce de Dieu comble tous nos besoins dans chaque

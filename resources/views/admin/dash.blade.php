@@ -441,6 +441,20 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#enseignementContent'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote',
+                    'undo', 'redo', '|', 'fontColor', 'fontBackgroundColor'
+                ]
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
     <script>
         // Initialisation des fonctionnalités JavaScript
         document.addEventListener('DOMContentLoaded', function() {
