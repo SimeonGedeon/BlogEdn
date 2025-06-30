@@ -1,15 +1,23 @@
 <?php
 
+use App\Http\Controllers\EnseignementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenseeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Categorie;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/admin', function () {
-    return view('admin.dash');
+    /* Categorie::create([
+        'nom'=>"Foi Chretienne"
+    ]); */
+
+    $categories = Categorie::all();
+
+    return view('admin.dash', compact('categories'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -33,5 +41,5 @@ Route::get('/pensees/{pensee}', [PenseeController::class, 'show'])->name('pensee
 
 Route::middleware('auth')->group(function () {
     Route::post('/pensees', [PenseeController::class, 'store'])->name('pensees.store');
-    // Ajouter d'autres routes privées ici si besoin (edit, update, delete)
+    Route::post('/enseignements', [EnseignementController::class, 'store'])->name('enseignements.store');
 });

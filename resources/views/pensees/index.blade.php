@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', 'Amour de Dieu')
 
@@ -49,7 +49,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="badge bg-light text-primary">{{ $pensee->tag }}</span>
                                 <small
-                                    class="text-muted">{{ $pensee->created_at->locale('fr')->diffForHumans() }} - {{$pensee->date_publication->format('d/m/Y')}}</small>
+                                    class="text-muted">{{ $pensee->created_at->locale('fr')->diffForHumans() }} - {{$pensee->created_at->format('d/m/Y')}}</small>
                             </div>
                         </div>
                         <div class="card-body">

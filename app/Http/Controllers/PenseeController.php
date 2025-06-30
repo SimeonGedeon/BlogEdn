@@ -18,7 +18,7 @@ class PenseeController extends Controller
         $pensees = Pensee::where('est_publie', true)
             ->latest()
             ->with('user')
-            ->paginate(10);
+            ->paginate(2);
 
         return view('pensees.index', compact('pensees'));
     }
@@ -50,7 +50,7 @@ class PenseeController extends Controller
 
         Pensee::create($validated);
 
-        return redirect()->back()->with('success', 'Pensée enregistrée avec succès !');
+        return redirect()->route('index')->with('success', 'Pensée enregistrée avec succès !');
     }
 
 

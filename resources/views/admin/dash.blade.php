@@ -210,7 +210,9 @@
                                 <h5 class="mb-0">Nouvel Enseignement</h5>
                             </div>
                             <div class="card-body">
-                                <form action="{{-- {{ route('enseignements.store') }} --}}" method="POST" enctype="multipart/form-data"> @csrf
+                                <form action="{{ route('enseignements.store') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
                                     <div class="mb-3">
                                         <label for="enseignementTitle" class="form-label">Titre</label>
                                         <input type="text" class="form-control" id="enseignementTitle" name="titre"
@@ -218,11 +220,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="enseignementCategory" class="form-label">Catégorie</label>
-                                        <select class="form-select" id="enseignementCategory" name="categorie">
-                                            <option selected>Choisir une catégorie</option>
-                                            <option>Doctrine</option>
-                                            <option>Vie pratique</option>
-                                            <option>Étude biblique</option>
+                                        <select class="form-select" id="enseignementCategory" name="categorie" required>
+                                            <option value="">Choisir une catégorie</option>
+                                            @foreach ($categories as $categorie)
+                                                <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3">
