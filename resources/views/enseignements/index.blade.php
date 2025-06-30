@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', 'Enseignement')
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="text-end mt-5">
-                <a href="{{ route('home') }}" class="btn btn-gradient">Revenir sur la page d'acceuil</a>
+                <a href="{{ route('index') }}" class="btn btn-gradient">Revenir sur la page d'acceuil</a>
             </div>
         </div>
     </section>

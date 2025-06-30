@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('about');
+        return view('home.about');
     }
 
     public function salut()
@@ -44,9 +44,14 @@ class HomeController extends Controller
         return view('evangelisation.index');
     }
 
+    public function chemin()
+    {
+        return view('evangelisation.salut');
+    }
+
     public function enseig()
     {
-        return view('enseignement.index');
+        return view('enseignements.index');
     }
 
 

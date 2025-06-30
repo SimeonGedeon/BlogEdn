@@ -168,7 +168,7 @@
                         </div>
                     @endforeach
                     <div class="text-end mt-1">
-                        <a href="{{ route('pensees.index') }}" class="btn btn-gradient">Voir toutes les Exhortations</a>
+                        <a href="{{ route('pensees') }}" class="btn btn-gradient">Voir toutes les Exhortations</a>
                     </div>
                 @endif
             </div>

@@ -16,10 +16,24 @@ class EnseignementController extends Controller
         return view('enseignements.create', compact('categories'));
     }
 
+    public function index()
+    {
+        $enseignements = Enseignement::where('est_publie', true)
+            ->latest()
+            ->with('user')
+            ->paginate(2); // ou le nombre que tu veux
+
+        return view('enseignements.index', compact('enseignements'));
+    }
+
+    public function show()
+    {
+        return view('enseignement.show');
+    }
+
     public function store(StoreEnseignementRequest $request)
     {
         $data = $request->validated();
-        dd($data);
 
         // L'utilisateur connecté devient l'auteur
         $data['user_id'] = Auth::id();
@@ -39,6 +53,6 @@ class EnseignementController extends Controller
         // Création de l'enseignement
         Enseignement::create($data);
 
-        return redirect()->route('home.index')->with('success', 'Enseignement enregistré avec succès.');
+        return redirect()->route('enseignements.index')->with('success', 'Enseignement enregistré avec succès.');
     }
 }

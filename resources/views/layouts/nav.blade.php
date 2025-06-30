@@ -9,11 +9,11 @@
           <div class="collapse navbar-collapse" id="navbarContent">
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                      <a class="nav-link @if (request()->route()->getName() === 'home') active @endif"
+                      <a class="nav-link @if (request()->route()->getName() === 'index') active @endif"
                           href="{{ route('index') }}">Accueil</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link @if (request()->route()->getName() === 'evang') active @endif"
+                      <a class="nav-link @if (request()->route()->getName() === 'salut') active @endif"
                           href="{{ route('salut') }}">Connaitre Jésus</a>
                   </li>
                   <li class="nav-item">
@@ -21,7 +21,7 @@
                           href="{{ route('enseig') }}">Enseignements</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link @if (request()->route()->getName() == 'pensees.index') active @endif"
+                      <a class="nav-link @if (request()->route()->getName() == 'pensee') active @endif"
                           href="{{ route('pensee') }}">Pensées du Jour</a>
                   </li>
                   <li class="nav-item">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', 'Évangélisation')
 
@@ -32,7 +32,7 @@
                         <h3 class="text-center mb-3">Je veux accepter Jésus</h3>
                         <p>Découvrez comment recevoir Christ dans votre vie et devenir enfant de Dieu.</p>
                         <div class="text-center mt-3 text-primary">
-                            <a href="{{ route('accepter-jesus') }}" class="text-primary text-decoration-none">
+                            <a href="{{ route('chemin') }}" class="text-primary text-decoration-none">
                                 <i class="bi bi-arrow-right"></i> Cliquez pour commencer
                             </a>
                         </div>

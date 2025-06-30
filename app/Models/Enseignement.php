@@ -19,7 +19,7 @@ class Enseignement extends Model
         'categorie_id'
     ];
 
-    public function auteur()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
