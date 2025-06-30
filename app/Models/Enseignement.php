@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class Enseignement extends Model
 {
@@ -18,6 +20,11 @@ class Enseignement extends Model
         'user_id',
         'categorie_id'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'titre';
+    }
 
     public function user()
     {

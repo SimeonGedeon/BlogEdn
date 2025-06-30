@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enseignement;
 use App\Models\Pensee;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class HomeController extends Controller
 
         // 1. Dernière pensée publiée (mise en avant, pensée du jour)
         $pensedujr = Pensee::where('est_publie', true)
-            ->orderBy('date_publication', 'desc') // plus cohérent que created_at
+            ->orderBy('created_at', 'desc') // plus cohérent que created_at
             ->first();
 
         // 2. 3 pensées publiées, sauf la dernière pensée du jour
@@ -22,7 +23,7 @@ class HomeController extends Controller
             ->when($pensedujr, function ($query) use ($pensedujr) {
                 $query->where('id', '!=', $pensedujr->id);
             })
-            ->orderBy('date_publication', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(3);
 
         // 3. Nombre total de pensées publiées
@@ -31,7 +32,10 @@ class HomeController extends Controller
         // 4. Vérifie s’il y a au moins une pensée en base
         $hasPensees = Pensee::exists();
 
-        return view('home.index', compact('pensees', 'pensedujr', 'hasPensees', 'count'));
+        $enseignements = Enseignement::all();
+
+
+        return view('home.index', compact('pensees', 'pensedujr', 'hasPensees', 'count', 'enseignements'));
     }
 
     public function about()
@@ -47,11 +51,6 @@ class HomeController extends Controller
     public function chemin()
     {
         return view('evangelisation.salut');
-    }
-
-    public function enseig()
-    {
-        return view('enseignements.index');
     }
 
 

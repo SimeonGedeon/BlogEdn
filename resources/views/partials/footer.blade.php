@@ -16,8 +16,8 @@
                 <ul class="list-unstyled footer-links">
                     <li class="mb-2"><a href="{{ route('index') }}">Accueil</a></li>
                     <li class="mb-2"><a href="{{ route('salut') }}">Connaitre Jésus</a></li>
-                    <li class="mb-2"><a href="{{ route('enseig') }}">Enseignements</a></li>
-                    <li class="mb-2"><a href="{{ route('pensee') }}">Événements</a></li>
+                    <li class="mb-2"><a href="{{ route('enseignements.index') }}">Enseignements</a></li>
+                    <li class="mb-2"><a href="{{ route('pensees.index') }}">Événements</a></li>
                 </ul>
             </div>
             <div class="col-md-3 mb-4">

@@ -35,7 +35,7 @@
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
                                     <span class="badge bg-primary me-2">Nouveau</span>
-                                    <small class="text-muted">{{ $pensedujr->create_at}}</small>
+                                    <small class="text-muted">{{ $pensedujr->create_at }}</small>
                                 </div>
                                 <h3 class="card-title h4"> {{ $pensedujr->titre }} </h3>
                                 <p class="bible-verse mb-3">"Or la foi est une ferme assurance des choses qu'on espère, une
@@ -145,7 +145,8 @@
                                                     <i class="bi bi-chat"></i> <span class="count">5</span>
                                                 </button>
                                             </div>
-                                            <a href="{{ route('pensees.show', $item->id) }}" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('pensees.show', $item->id) }}"
+                                                class="btn btn-sm btn-primary">
                                                 Lire plus <i class="bi bi-arrow-right"></i>
                                             </a>
                                         </div>
@@ -168,7 +169,7 @@
                         </div>
                     @endforeach
                     <div class="text-end mt-1">
-                        <a href="{{ route('pensees') }}" class="btn btn-gradient">Voir toutes les Exhortations</a>
+                        <a href="{{ route('pensees.index') }}" class="btn btn-gradient">Voir toutes les Exhortations</a>
                     </div>
                 @endif
             </div>
@@ -181,114 +182,35 @@
             <h2 class="section-title fw-bold">Enseignements</h2>
             <div class="row g-4">
                 <!-- Message 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card message-card h-100">
-                        <div class="share-buttons">
-                            <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
-                            <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
-                                    class="bi bi-chat-text"></i></a>
-                        </div>
-                        <div class="card-body p-4">
-                            <small class="text-muted d-block mb-2">14 novembre 2023</small>
-                            <h3 class="card-title h5">La grâce suffisante</h3>
-                            <p class="bible-verse mb-3">"Ma grâce te suffit, car ma puissance s'accomplit dans la
-                                faiblesse." (2 Corinthiens 12:9)</p>
-                            <p class="card-text">Découvrez comment la grâce de Dieu comble tous nos besoins dans chaque
-                                situation...</p>
-                            <a href="{{-- {{ route('pensees.index') }} --}}" class="btn btn-outline-primary btn-sm">Lire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Message 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card message-card h-100">
-                        <div class="share-buttons">
-                            <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
-                            <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
-                                    class="bi bi-chat-text"></i></a>
-                        </div>
-                        <div class="card-body p-4">
-                            <small class="text-muted d-block mb-2">12 novembre 2023</small>
-                            <h3 class="card-title h5">L'amour inconditionnel</h3>
-                            <p class="bible-verse mb-3">"Car Dieu a tant aimé le monde qu'il a donné son Fils unique..."
-                                (Jean 3:16)</p>
-                            <p class="card-text">Exploration de la profondeur de l'amour divin qui transcende toutes nos
-                                fautes...</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Lire</a>
+                {{-- @dump($enseignements) --}}
+                @foreach ($enseignements as $enseignement)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card message-card h-100">
+                            <div class="share-buttons">
+                                <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
+                                <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
+                                        class="bi bi-chat-text"></i></a>
+                            </div>
+                            <div class="card-body p-4">
+                                <small class="text-muted d-block mb-2">{{ $enseignement->created_at->format('d/m/Y') }} - {{ $enseignement->created_at->locale('fr')->diffForHumans() }} </small>
+                                <h3 class="card-title h5"></h3>
+                                <p class="bible-verse mb-3">"Ma grâce te suffit, car ma puissance s'accomplit dans la
+                                    faiblesse." (2 Corinthiens 12:9)</p>
+                                <p class="card-text">Découvrez comment la grâce de Dieu comble tous nos besoins dans chaque
+                                    situation...</p>
+                                <a href="{{ route('enseignements.show', $enseignement) }}"
+                                    class="btn btn-outline-pr*imary btn-sm">Lire</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Message 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card message-card h-100">
-                        <div class="share-buttons">
-                            <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
-                            <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
-                                    class="bi bi-chat-text"></i></a>
-                        </div>
-                        <div class="card-body p-4">
-                            <small class="text-muted d-block mb-2">10 novembre 2023</small>
-                            <h3 class="card-title h5">La paix véritable</h3>
-                            <p class="bible-verse mb-3">"Je vous laisse la paix, je vous donne ma paix." (Jean 14:27)</p>
-                            <p class="card-text">Comment trouver la paix intérieure dans un monde troublé...</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Lire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Message 4 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card message-card h-100">
-                        <div class="share-buttons">
-                            <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
-                            <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
-                                    class="bi bi-chat-text"></i></a>
-                        </div>
-                        <div class="card-body p-4">
-                            <small class="text-muted d-block mb-2">8 novembre 2023</small>
-                            <h3 class="card-title h5">Le pardon libérateur</h3>
-                            <p class="bible-verse mb-3">"Si nous confessons nos péchés, il est fidèle et juste pour nous
-                                les pardonner." (1 Jean 1:9)</p>
-                            <p class="card-text">Le pouvoir transformateur du pardon divin et humain...</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Lire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Message 5 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card message-card h-100">
-                        <div class="share-buttons">
-                            <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
-                            <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
-                                    class="bi bi-chat-text"></i></a>
-                        </div>
-                        <div class="card-body p-4">
-                            <small class="text-muted d-block mb-2">5 novembre 2023</small>
-                            <h3 class="card-title h5">L'espérance en Christ</h3>
-                            <p class="bible-verse mb-3">"Christ en vous, l'espérance de la gloire." (Colossiens 1:27)</p>
-                            <p class="card-text">Une réflexion sur l'espérance vivante que nous avons en Jésus...</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Lire</a>
-                        </div>
-                    </div>
+                @endforeach
+                <div class="text-end mt-5">
+                    <a href="{{ route('enseignements.index') }}" class="btn btn-gradient">Voir toutes les
+                        enseignements</a>
                 </div>
             </div>
-            <div class="text-end mt-5">
-                <a href="{{-- {{ route('pensees.index') }} --}}" class="btn btn-gradient">Voir toutes les enseignements</a>
-            </div>
-        </div>
     </section>
 
     <!-- Section Motivations -->

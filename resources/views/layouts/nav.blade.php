@@ -18,11 +18,11 @@
                   </li>
                   <li class="nav-item">
                       <a class="nav-link @if (request()->route()->getName() == 'enseig') active @endif"
-                          href="{{ route('enseig') }}">Enseignements</a>
+                          href="{{ route('enseignements.index') }}">Enseignements</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link @if (request()->route()->getName() == 'pensee') active @endif"
-                          href="{{ route('pensee') }}">Pensées du Jour</a>
+                          href="{{ route('pensees.index') }}">Pensées du Jour</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link @if (request()->route()->getName() == 'about') active @endif" href="{{ route('about') }}">À

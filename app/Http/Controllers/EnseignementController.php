@@ -28,7 +28,7 @@ class EnseignementController extends Controller
 
     public function show()
     {
-        return view('enseignement.show');
+        return view('enseignements.show');
     }
 
     public function store(StoreEnseignementRequest $request)
@@ -54,5 +54,10 @@ class EnseignementController extends Controller
         Enseignement::create($data);
 
         return redirect()->route('enseignements.index')->with('success', 'Enseignement enregistré avec succès.');
+    }
+
+    public function enseig(Enseignement $enseig)
+    {
+        return view('enseignements.index', compact('enseig'));
     }
 }
