@@ -53,11 +53,6 @@ class EnseignementController extends Controller
         // Création de l'enseignement
         Enseignement::create($data);
 
-        return redirect()->route('enseignements.index')->with('success', 'Enseignement enregistré avec succès.');
-    }
-
-    public function enseig(Enseignement $enseig)
-    {
-        return view('enseignements.index', compact('enseig'));
+        return redirect()->route('index')->with('success', 'Enseignement enregistré avec succès.');
     }
 }

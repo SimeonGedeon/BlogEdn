@@ -3,80 +3,143 @@
 @section('title', 'Enseignement')
 
 @section('content')
-    <section class="py-5">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Message quand aucun enseignement -->
-                <div class="col-12">
-                    <div class="card message-card text-center p-5 border-dashed">
-                        <div class="card-body">
-                            <div class="empty-state-icon mb-4">
-                                <i class="bi bi-book" style="font-size: 3rem; color: var(--primary-color);"></i>
-                            </div>
-                            <h3 class="h4" style="color: var(--primary-color);">Section en préparation</h3>
-                            <p class="text-muted mb-4">Nous préparons des enseignements bibliques pour votre
-                                édification.<br>Revenez bientôt ou abonnez-vous pour être informé.</p>
-                            <a href="" class="btn btn-gradient">
-                                <i class="bi bi-envelope me-2"></i>Recevoir les nouveaux enseignements
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-end mt-5">
-                <a href="{{ route('index') }}" class="btn btn-gradient">Revenir sur la page d'acceuil</a>
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="display-5 fw-bold">Enseignements</h1>
+                <p class="lead text-muted">Retrouvez toutes les enseignements</p>
             </div>
         </div>
-    </section>
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h1 class="h3 mb-0">{{ $pensee->titre }}</h1>
-                            <span class="badge bg-primary">{{ $pensee->date_publication->format('d/m/Y') }}</span>
-                        </div>
-                        <div class="bible-verse bg-light p-4 mb-4 rounded">
-                            <i class="bi bi-quote text-primary fs-1"></i>
-                            <blockquote class="mb-0 fs-5">{{ $pensee->contenu }}</blockquote>
-                            <footer class="blockquote-footer mt-2">{{ $pensee->verset }}</footer>
-                        </div>
 
-                        <div class="pensee-content mb-4">
-                            {!! $pensee->exhortation !!}
-                        </div>
+        <!-- Filtres et recherche -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Rechercher une pensée..." id="searchInput">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-funnel"></i> Filtrer par thème
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Tous les thèmes</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {{-- @foreach ($themes as $theme)
+                            <li><a class="dropdown-item" href="#">{{ $theme }}</a></li>
+                        @endforeach --}}
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="share-buttons">
-                                <a href="#" class="btn btn-sm btn-outline-secondary me-2">
-                                    <i class="bi bi-heart"></i> 24
-                                </a>
-                                <a href="#" class="btn btn-sm btn-outline-secondary me-2">
-                                    <i class="bi bi-chat"></i> 5
-                                </a>
+        <!-- Liste des pensées -->
+        <div class="row" id="penseesContainer">
+            @forelse($enseignements as $pensee)
+                <div class="col-lg-6 mb-4">
+                    <div class="card pensee-card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-light text-primary">{{ $pensee->tag }}</span>
+                                <small
+                                    class="text-muted">{{ $pensee->created_at->locale('fr')->diffForHumans() }} - {{$pensee->created_at->format('d/m/Y')}}</small>
                             </div>
-
-                            <div>
-                                <a href="#" class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="bi bi-facebook"></i>
-                                </a>
-                                <a href="#" class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="bi bi-twitter"></i>
-                                </a>
-                                <a href="#" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-share"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5 card-title">{{ $pensee->titre }}</h3>
+                            <div class="bible-verse my-3">
+                                <i class="bi bi-quote text-primary opacity-25"></i>
+                                "{!! $pensee->contenu !!}"
+                                <div class="text-end mt-2 text-muted">- {{ $pensee->verset }}</div>
+                            </div>
+                            <p class="card-text">{{ $pensee->exhortation }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="reactions">
+                                    <button class="btn btn-sm btn-outline-secondary me-2">
+                                        <i class="bi bi-heart"></i> {{ $pensee->likes_count }}
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-chat"></i> {{ $pensee->comments_count }}
+                                    </button>
+                                </div>
+                                <a href="{{ route('enseignements.show', $pensee) }}" class="btn btn-sm btn-primary">
+                                    Lire plus <i class="bi bi-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="text-center mt-4">
-                    <a href="{{ route('pensees.index') }}" class="btn btn-primary">
-                        <i class="bi bi-arrow-left"></i> Retour aux pensées
-                    </a>
+            @empty
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="bi bi-journal-x text-muted" style="font-size: 3rem;"></i>
+                            <h4 class="mt-3">Aucune pensée disponible</h4>
+                            <p class="text-muted">Revenez plus tard pour découvrir nos nouvelles méditations</p>
+                        </div>
+                    </div>
                 </div>
+            @endforelse
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {{-- Previous Page Link --}}
+                        @if ($enseignements->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link">
+                                    <i class="bi bi-chevron-left"></i>
+                                </span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $enseignements->previousPageUrl() }}" rel="prev">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                        @endif
+
+                        {{-- Pagination Elements --}}
+                        @foreach ($enseignements->getUrlRange(1, $enseignements->lastPage()) as $page => $url)
+                            @if ($page == $enseignements->currentPage())
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">{{ $page }}</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+
+                        {{-- Next Page Link --}}
+                        @if ($enseignements->hasMorePages())
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $enseignements->nextPageUrl() }}" rel="next">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link">
+                                    <i class="bi bi-chevron-right"></i>
+                                </span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

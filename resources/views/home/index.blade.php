@@ -176,32 +176,24 @@
         </div>
     </section>
 
+
     <!-- Enseignements -->
     <section class="py-5 bg-light">
         <div class="container">
             <h2 class="section-title fw-bold">Enseignements</h2>
             <div class="row g-4">
                 <!-- Message 1 -->
-                {{-- @dump($enseignements) --}}
+                @dump($enseignements)
                 @foreach ($enseignements as $enseignement)
                     <div class="col-md-6 col-lg-4">
                         <div class="card message-card h-100">
-                            <div class="share-buttons">
-                                <a href="#" class="share-btn facebook-btn"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="share-btn twitter-btn"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="share-btn whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
-                                <a href="sms:?body=Je%20partage%20ce%20message%20avec%20toi" class="share-btn sms-btn"><i
-                                        class="bi bi-chat-text"></i></a>
-                            </div>
-                            <div class="card-body p-4">
-                                <small class="text-muted d-block mb-2">{{ $enseignement->created_at->format('d/m/Y') }} - {{ $enseignement->created_at->locale('fr')->diffForHumans() }} </small>
-                                <h3 class="card-title h5"> {{$enseignement->titre}} </h3>
-                                <p class="bible-verse mb-3">"Ma grâce te suffit, car ma puissance s'accomplit dans la
-                                    faiblesse." (2 Corinthiens 12:9)</p>
-                                <p class="card-text">Découvrez comment la grâce de Dieu comble tous nos besoins dans chaque
-                                    situation...</p>
-                                <a href="{{ route('enseignements.show', $enseignement) }}"
-                                    class="btn btn-outline-pr*imary btn-sm">Lire</a>
+                            <img src="https://source.unsplash.com/random/600x400/?bible,study" class="card-img-top"
+                                alt="Enseignement">
+                            <div class="card-body">
+                                <small class="text-muted d-block mb-2">{{$enseignement->categorie->nom}}</small>
+                                <h3 class="card-title h5">{{$enseignement->titre}}</h3>
+                                <p class="card-text">{{$enseignement->contenu}}</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">Étudier</a>
                             </div>
                         </div>
                     </div>

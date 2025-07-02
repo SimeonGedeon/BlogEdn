@@ -179,9 +179,8 @@
                                             placeholder="Écrivez votre pensée inspirante ici..."></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="contenu" class="form-label">Exhortation</label>
-                                        <textarea class="form-control" id="exhortation" name="exhortation" rows="2"
-                                            placeholder="Écrivez votre exhortation ici..."></textarea>
+                                        <label for="exhortation" class="form-label">Exhortation</label>
+                                        <textarea class="form-control" id="enseignementContent" name="exhortation" rows="20"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="hashtags" class="form-label">Hashtag</label>
@@ -228,8 +227,8 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="enseignementContent" class="form-label">Contenu</label>
-                                        <textarea class="form-control" id="enseignementContent" name="contenu" rows="10"></textarea>
+                                        <label for="enseignementContentf" class="form-label">Contenu</label>
+                                        <textarea class="form-control" id="enseignementContentf" name="contenu" rows="10"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
@@ -442,6 +441,19 @@
 
 @section('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#enseignementContentf'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote',
+                    'undo', 'redo', '|', 'fontColor', 'fontBackgroundColor'
+                ]
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
     <script>
         ClassicEditor
             .create(document.querySelector('#enseignementContent'), {

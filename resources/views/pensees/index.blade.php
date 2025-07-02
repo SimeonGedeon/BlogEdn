@@ -12,31 +12,23 @@
         </div>
 
         <!-- Filtres et recherche -->
+        <!-- Formulaire de recherche -->
         <div class="row mb-4">
             <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Rechercher une pensée..." id="searchInput">
-                    <button class="btn btn-primary" type="button">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown"
-                        data-bs-toggle="dropdown">
-                        <i class="bi bi-funnel"></i> Filtrer par thème
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Tous les thèmes</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        {{-- @foreach ($themes as $theme)
-                            <li><a class="dropdown-item" href="#">{{ $theme }}</a></li>
-                        @endforeach --}}
-                    </ul>
-                </div>
+                <form action="{{ route('pensees.index') }}" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Rechercher une pensée..."
+                            value="{{ request('search') }}" aria-label="Rechercher">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-search"></i> Rechercher
+                        </button>
+                        @if (request('search'))
+                            <a href="{{ route('pensees.index') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x"></i> Effacer
+                            </a>
+                        @endif
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -48,8 +40,8 @@
                         <div class="card-header bg-primary text-white">
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="badge bg-light text-primary">{{ $pensee->tag }}</span>
-                                <small
-                                    class="text-muted">{{ $pensee->created_at->locale('fr')->diffForHumans() }} - {{$pensee->created_at->format('d/m/Y')}}</small>
+                                <small class="text-muted">{{ $pensee->created_at->locale('fr')->diffForHumans() }} -
+                                    {{ $pensee->created_at->format('d/m/Y') }}</small>
                             </div>
                         </div>
                         <div class="card-body">
@@ -71,7 +63,7 @@
                                         <i class="bi bi-chat"></i> {{ $pensee->comments_count }}
                                     </button>
                                 </div>
-                                <a href="{{ route('pensees.show', $pensee->id) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('pensees.show', $pensee) }}" class="btn btn-sm btn-primary">
                                     Lire plus <i class="bi bi-arrow-right"></i>
                                 </a>
                             </div>

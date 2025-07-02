@@ -13,12 +13,26 @@ class PenseeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pensees = Pensee::where('est_publie', true)
+        $query = Pensee::where('est_publie', true)
             ->latest()
-            ->with('user')
-            ->paginate(2);
+            ->with('user');
+
+        // Ajout de la recherche si le paramètre existe
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('titre', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('contenu', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('verset', 'LIKE', "%{$searchTerm}%")
+                    ->orWhereHas('user', function ($userQuery) use ($searchTerm) {
+                        $userQuery->where('name', 'LIKE', "%{$searchTerm}%");
+                    });
+            });
+        }
+
+        $pensees = $query->paginate(4);
 
         return view('pensees.index', compact('pensees'));
     }

@@ -32,8 +32,7 @@ class HomeController extends Controller
         // 4. Vérifie s’il y a au moins une pensée en base
         $hasPensees = Pensee::exists();
 
-        $enseignements = Enseignement::all();
-
+        $enseignements = Enseignement::with('categorie')->get();
 
         return view('home.index', compact('pensees', 'pensedujr', 'hasPensees', 'count', 'enseignements'));
     }
